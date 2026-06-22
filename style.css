@@ -1,0 +1,671 @@
+/* --- Reset & Global Configurations --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, Arial, sans-serif;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background-color: #050101;
+    color: #fff;
+    overflow-x: hidden;
+  }
+  
+  /* --- Pinned Navigation Header Dashboard --- */
+  .navbar {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    z-index: 10;
+    background: linear-gradient(to bottom, rgba(5, 1, 1, 0.95), rgba(0, 0, 0, 0));
+    border-bottom: 1px solid rgba(255, 20, 20, 0.15);
+    backdrop-filter: blur(8px);
+  }
+  
+  .logo {
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+  }
+  
+  .logo span { color: #ff1111; }
+  .nav-links { display: flex; list-style: none; gap: 35px; }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #b0b0b0;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    transition: 0.3s ease;
+  }
+  
+  .nav-links a:hover, .nav-links a.active {
+    color: #ff1111;
+    text-shadow: 0 0 8px #ff1111;
+  }
+  
+  /* --- Dynamic Status System Styling --- */
+  .nav-status {
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.5s ease;
+  }
+  
+  .nav-status.status-offline {
+    color: #551111;
+    border: 1px solid #551111;
+    background: rgba(85, 17, 17, 0.05);
+  }
+  
+  .nav-status.status-online {
+    color: #ff1111;
+    border: 1px solid #ff1111;
+    background: rgba(255, 17, 17, 0.05);
+    box-shadow: 0 0 12px #ff1111;
+  }
+  
+  .status-container { position: relative; }
+  
+  .status-dropdown {
+    position: absolute;
+    top: 120%; 
+    right: 0;
+    width: 220px;
+    background: rgba(15, 3, 3, 0.95);
+    border: 1px solid #ff1111;
+    box-shadow: 0 0 15px rgba(255, 17, 17, 0.25);
+    padding: 5px 0;
+    z-index: 50;
+    display: none;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  .status-dropdown.show { display: block; opacity: 1; transform: translateY(0); }
+  
+  .status-dropdown a {
+    display: block;
+    padding: 10px 15px;
+    color: #b0b0b0;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-align: right;
+    transition: all 0.2s ease;
+  }
+  
+  .status-dropdown a:hover {
+    background: rgba(255, 17, 17, 0.15);
+    color: #ff1111;
+    text-shadow: 0 0 5px #ff1111;
+  }
+  
+  /* --- Parallax Viewport Section Scaffolding --- */
+  .hero-parallax-wrapper {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; 
+  }
+  
+  .parallax-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120vh; 
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    pointer-events: none;
+    will-change: transform; 
+  }
+  
+  .hero-bg { background-image: linear-gradient(to bottom, rgba(150, 10, 10, 0.4) 0%, rgba(5, 1, 1, 0.2) 60%, rgba(5, 1, 1, 0.9) 100%), url("images/squad.png"); }
+  .manifesto-bg { background-image: linear-gradient(to bottom, rgba(5, 1, 1, 0.95) 0%, rgba(120, 5, 5, 0.25) 50%, rgba(5, 1, 1, 0.95) 100%), url("images/squad.png"); }
+  .terminal-bg { background-image: linear-gradient(to bottom, rgba(5, 1, 1, 0.95) 0%, rgba(15, 3, 3, 0.4) 50%, rgba(5, 1, 1, 0.95) 100%), url("images/squad.png"); }
+  
+  .grid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 0, 0, 0), rgba(255, 0, 0, 0.03));
+    background-size: 100% 4px, 6px 100%;
+    z-index: 2;
+    pointer-events: none;
+  }
+  
+  .vignette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 20%, rgba(5, 1, 1, 0.9) 90%);
+    z-index: 3;
+    pointer-events: none;
+  }
+  
+  /* --- Content Typography --- */
+  .content { position: relative; text-align: center; color: white; z-index: 4; padding: 0 20px; }
+  .cyber-tag { font-size: 13px; color: #ff3333; letter-spacing: 4px; margin-bottom: 10px; text-shadow: 0 0 5px rgba(255, 51, 51, 0.5); }
+  h1 { font-size: 75px; font-weight: 900; letter-spacing: 6px; text-shadow: 0 0 20px #ff1111, 0 0 40px #800000; }
+  p { margin-top: 15px; font-size: 16px; max-width: 500px; margin-left: auto; margin-right: auto; letter-spacing: 1px; line-height: 1.6; opacity: 0.75; color: #e0d0d0; }
+  
+  .cyber-btn {
+    margin-top: 35px;
+    padding: 14px 40px;
+    border: 1px solid #ff1111;
+    background: rgba(20, 2, 2, 0.7);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(255, 17, 17, 0.3);
+  }
+  
+  .cyber-btn:hover { background: #ff1111; color: #000000; box-shadow: 0 0 30px #ff1111; transform: translateY(-2px); }
+  
+  /* --- Manifesto Layout Sections --- */
+  .manifesto-container { position: relative; z-index: 4; max-width: 1100px; width: 100%; padding: 0 40px; }
+  .manifesto-header { margin-bottom: 50px; text-align: left; }
+  .section-number { color: #ff1111; font-weight: bold; font-size: 18px; letter-spacing: 2px; }
+  .manifesto-header h2 { font-size: 42px; letter-spacing: 4px; color: #fff; text-shadow: 0 0 15px rgba(255, 17, 17, 0.4); margin-top: 5px; }
+  .accent-bar { width: 80px; height: 3px; background: #ff1111; margin-top: 15px; box-shadow: 0 0 8px #ff1111; }
+  .manifesto-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+  
+  .manifesto-card {
+    background: rgba(15, 3, 3, 0.7);
+    border-left: 3px solid #ff1111;
+    padding: 30px;
+    border: 1px solid rgba(255, 17, 17, 0.1);
+    border-left: 3px solid #ff1111;
+    transition: all 0.3s ease;
+  }
+  
+  .manifesto-card:hover { background: rgba(30, 4, 4, 0.85); box-shadow: 0 0 20px rgba(255, 17, 17, 0.15); transform: translateY(-5px); }
+  .manifesto-card h3 { font-size: 16px; color: #ff1111; letter-spacing: 2px; margin-bottom: 15px; text-align: left; }
+  .manifesto-card p { font-size: 13px; line-height: 1.7; color: #d8c8c8; opacity: 0.8; text-align: left; }
+  
+  /* ==================== TACTICAL TERMINAL PANEL GRID ==================== */
+  .terminal-dashboard-container {
+    position: relative;
+    z-index: 4;
+    width: 100%;
+    max-width: 1250px;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 30px;
+    padding: 0 25px;
+    margin-top: 60px;
+  }
+  
+  .terminal-sidebar { display: flex; flex-direction: column; gap: 20px; }
+  
+  .passport-frame {
+    position: relative;
+    width: 180px;
+    height: 220px;
+    border: 2px solid #ff1111;
+    background: rgba(10, 2, 2, 0.8);
+    box-shadow: 0 0 15px rgba(255, 17, 17, 0.2);
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  
+  .passport-frame .scanner-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #ff1111;
+    box-shadow: 0 0 10px #ff1111;
+    z-index: 3;
+    animation: laserScan 3s linear infinite;
+  }
+  
+  @keyframes laserScan { 0% { top: 0%; } 50% { top: 100%; } 100% { top: 0%; } }
+  .passport-avatar { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(120%); opacity: 0.8; }
+  
+  .passport-badge {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 17, 17, 0.9);
+    color: #000;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 5px 0;
+    z-index: 4;
+    text-transform: uppercase;
+  }
+  
+  /* ==================== HARDCORE PROGRESS TRACKING PANEL ==================== */
+  .progress-tracking-box {
+    background: rgba(15, 3, 3, 0.9);
+    border: 1px solid rgba(255, 17, 17, 0.2);
+    padding: 20px;
+    border-top: 3px solid #ff1111;
+    box-shadow: 0 0 15px rgba(255, 17, 17, 0.1);
+  }
+  
+  .tracker-header { font-size: 11px; color: #ff1111; letter-spacing: 2px; font-weight: bold; margin-bottom: 12px; text-align: left; }
+  .xp-metrics { font-size: 16px; font-weight: bold; color: #ffffff; letter-spacing: 1px; text-align: left; margin-bottom: 8px; }
+  
+  .xp-bar-container {
+    width: 100%;
+    height: 10px;
+    background: rgba(20, 2, 2, 0.8);
+    border: 1px solid rgba(255, 17, 17, 0.3);
+    margin-bottom: 14px;
+    position: relative;
+  }
+  
+  .xp-bar-fill {
+    height: 100%;
+    background: #ff1111;
+    box-shadow: 0 0 10px #ff1111, 0 0 20px #ff1111;
+    width: 0%;
+    border-right: 3px solid #ffffff; 
+    transition: width 0.6s cubic-bezier(0.1, 0.8, 0.25, 1);
+  }
+  
+  .stat-row { display: flex; justify-content: space-between; gap: 10px; }
+  .stat-readout { font-size: 11px; color: #888; letter-spacing: 1px; text-align: left; }
+  .stat-readout span { color: #fff; font-weight: bold; }
+  
+  /* Mission Control Brief Box */
+  .mission-briefing-box { background: rgba(15, 3, 3, 0.85); border: 1px solid rgba(255, 17, 17, 0.2); padding: 20px; }
+  .commander-tag { font-size: 11px; color: #ff1111; letter-spacing: 1px; font-weight: bold; margin-bottom: 8px; }
+  .objective-headline { font-size: 13px; font-style: italic; color: #fff; opacity: 0.9; margin-bottom: 20px; text-align: left; }
+  .daily-goals-list { display: flex; flex-direction: column; gap: 12px; }
+  .goal-node { display: flex; align-items: flex-start; gap: 10px; }
+  .goal-status { width: 8px; height: 8px; border: 1px solid #ff1111; margin-top: 4px; flex-shrink: 0; }
+  .goal-status.active { background: #ff1111; box-shadow: 0 0 5px #ff1111; }
+  .goal-node p { font-size: 11px; line-height: 1.4; color: #b0b0b0; margin: 0; text-align: left; }
+  
+  /* Main Hub Monitor Screen & Input Panel CSS */
+  .terminal-main-hub { background: rgba(10, 2, 2, 0.6); border: 1px solid rgba(255, 17, 17, 0.1); display: flex; flex-direction: column; }
+  .hub-header { background: rgba(255, 17, 17, 0.05); border-bottom: 1px solid rgba(255, 17, 17, 0.1); padding: 12px 20px; font-size: 12px; letter-spacing: 2px; color: #ff1111; font-weight: bold; text-align: left; }
+  
+  .interactive-log-panel {
+    padding: 25px 30px;
+    background: rgba(20, 3, 3, 0.4);
+    border-bottom: 1px solid rgba(255, 17, 17, 0.1);
+  }
+  
+  .form-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .log-input-group { display: flex; flex-direction: column; text-align: left; }
+  .log-input-group label { font-size: 10px; letter-spacing: 1px; color: #b0b0b0; margin-bottom: 6px; }
+  .log-input-group input { padding: 10px; background: rgba(0, 0, 0, 0.8); border: 1px solid rgba(255, 17, 17, 0.3); color: #fff; font-family: monospace; }
+  .log-input-group input:focus { outline: none; border-color: #ff1111; box-shadow: 0 0 8px rgba(255, 17, 17, 0.2); }
+  
+  .transmit-data-btn {
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px;
+    background: none;
+    border: 1px solid #ff1111;
+    color: #ff1111;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .transmit-data-btn:hover { background: rgba(255, 17, 17, 0.15); box-shadow: 0 0 15px rgba(255, 17, 17, 0.2); }
+  
+  /* ==================== PREMIUM REDESIGNED LEADERBOARD MATRIX ==================== */
+  .cyber-leaderboard-card {
+    margin: 20px;
+    background: rgba(5, 2, 2, 0.95);
+    border: 1px solid rgba(255, 17, 17, 0.2);
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    overflow: hidden;
+  }
+  
+  .leaderboard-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, rgba(255, 17, 17, 0.08) 0%, transparent 100%);
+    padding: 15px 25px;
+    border-bottom: 1px solid rgba(255, 17, 17, 0.15);
+  }
+  
+  .panel-title-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .neon-pulse-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #ff1111;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #ff1111;
+    animation: pulseRate 2s infinite ease-in-out;
+  }
+  
+  @keyframes pulseRate {
+    0%, 100% { opacity: 0.4; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+  
+  .panel-title-block h2 {
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #ffffff;
+  }
+  
+  .panel-subtitle-tag {
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: #ff1111;
+    border: 1px solid rgba(255, 17, 17, 0.3);
+    padding: 2px 8px;
+    background: rgba(255, 17, 17, 0.05);
+  }
+  
+  .leaderboard-scroll-area {
+    max-height: 380px;
+    overflow-y: auto;
+  }
+  
+  /* Redesigned Structured Grid Table Layout */
+  .redesigned-grid-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .redesigned-grid-table th {
+    padding: 14px 20px;
+    font-size: 10px;
+    font-weight: bold;
+    color: #666666;
+    letter-spacing: 2px;
+    border-bottom: 2px solid rgba(255, 17, 17, 0.1);
+    background: rgba(0, 0, 0, 0.3);
+  }
+  
+  .redesigned-grid-table td {
+    padding: 16px 20px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    vertical-align: middle;
+  }
+  
+  /* Strategic Dynamic Column Alignment Rules */
+  .col-align-left { text-align: left; }
+  .col-align-center { text-align: center; }
+  .col-align-right { text-align: right; }
+  
+  /* Custom Row Styles & Badges */
+  .leaderboard-rank-badge {
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 2px;
+    display: inline-block;
+    min-width: 45px;
+  }
+  
+  /* Dynamic Tier Colors */
+  .tier-1st { background: rgba(255, 17, 17, 0.15); border: 1px solid #ff1111; color: #ff1111; box-shadow: 0 0 10px rgba(255, 17, 17, 0.2); }
+  .tier-2nd { background: rgba(255, 255, 255, 0.05); border: 1px solid #888888; color: #ffffff; }
+  .tier-standard { background: rgba(0, 0, 0, 0.4); border: 1px solid #333333; color: #888888; }
+  
+  .operator-id-cell {
+    font-weight: bold;
+    color: #e0e0e0;
+  }
+  
+  .level-pill {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2px 10px;
+    font-size: 11px;
+    color: #ffffff;
+    border-radius: 10px;
+    display: inline-block;
+  }
+  
+  .volume-count-text {
+    font-family: monospace;
+    font-weight: bold;
+    color: #ff1111;
+    text-shadow: 0 0 4px rgba(255, 17, 17, 0.2);
+  }
+  
+  /* Highlights the active operator's profile row contextually */
+  .redesigned-grid-table tbody tr.active-focused-row {
+    background: linear-gradient(90deg, rgba(255, 17, 17, 0.06) 0%, transparent 100%) !important;
+    border-left: 4px solid #ff1111;
+  }
+  .redesigned-grid-table tbody tr.active-focused-row .operator-id-cell {
+    color: #ff1111;
+    text-shadow: 0 0 8px rgba(255, 17, 17, 0.4);
+  }
+  
+  .redesigned-grid-table tbody tr {
+    transition: background 0.2s ease;
+  }
+  .redesigned-grid-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.01);
+  }
+  
+  /* Empty State Styling when no profiles exist */
+  .leaderboard-empty-state {
+    text-align: center;
+    padding: 60px 0 !important;
+  }
+  
+  .glitch-text-loader {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #444444;
+    animation: pulseText 1.5s infinite alternate;
+  }
+  
+  @keyframes pulseText {
+    0% { color: #333333; }
+    100% { color: #777777; }
+  }
+  
+  /* ==================== HIGH VISIBILITY PROMOTION POPUP CONSOLE ==================== */
+  .promotion-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(4, 0, 0, 0.95);
+    backdrop-filter: blur(15px);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s cubic-bezier(0.1, 0.8, 0.2, 1);
+  }
+  
+  .promotion-modal-overlay.active { opacity: 1; pointer-events: auto; }
+  
+  .promotion-glow-container {
+    background: rgba(15, 2, 2, 0.98);
+    border: 2px solid #ff1111;
+    box-shadow: 0 0 50px rgba(255, 17, 17, 0.4), inset 0 0 30px rgba(255, 17, 17, 0.1);
+    padding: 50px 40px;
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    transform: scale(0.85);
+    transition: transform 0.5s cubic-bezier(0.1, 0.8, 0.2, 1);
+  }
+  
+  .promotion-modal-overlay.active .promotion-glow-container { transform: scale(1); }
+  
+  .promo-glitch-tag {
+    font-size: 11px;
+    color: #ff3333;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 5px #ff1111;
+  }
+  
+  .promo-title {
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: #fff;
+    text-shadow: 0 0 20px #ff1111;
+  }
+  
+  .promo-divider-line {
+    width: 120px;
+    height: 2px;
+    background: #ffffff;
+    margin: 20px auto;
+    box-shadow: 0 0 8px #ffffff;
+  }
+  
+  .promo-label { font-size: 11px; color: #888; letter-spacing: 1px; margin-bottom: 20px; }
+  
+  .promo-badge-glow {
+    background: rgba(255, 17, 17, 0.1);
+    border: 1px dashed #ff1111;
+    padding: 15px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: #ff1111;
+    text-shadow: 0 0 10px #ff1111;
+    margin-bottom: 35px;
+    display: inline-block;
+    width: 100%;
+    text-transform: uppercase;
+  }
+  
+  .promo-close-btn {
+    background: #ff1111;
+    border: 1px solid #ff1111;
+    color: #000;
+    width: 100%;
+    padding: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .promo-close-btn:hover {
+    background: #fff;
+    border-color: #fff;
+    box-shadow: 0 0 20px #fff;
+  }
+  
+  /* --- Existing Authentication & Safety Layers --- */
+  .intercept-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 1, 1, 0.96); backdrop-filter: blur(10px); z-index: 40; display: none; align-items: center; justify-content: center; padding: 20px; }
+  .intercept-overlay.active { display: flex; }
+  .intercept-box { background: rgba(15, 3, 3, 0.95); border: 1px solid #ff1111; box-shadow: 0 0 40px rgba(255, 17, 17, 0.3); max-width: 550px; width: 100%; padding: 40px; text-align: center; border-top: 6px solid #ff1111; }
+  .warning-header { font-size: 11px; letter-spacing: 3px; color: #ff1111; font-weight: bold; margin-bottom: 20px; }
+  .intercept-box h2 { font-size: 26px; letter-spacing: 2px; color: #fff; margin-bottom: 20px; }
+  .intercept-text { font-size: 13px; line-height: 1.6; color: #b0b0b0; margin-bottom: 30px; }
+  .agreement-label { display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 11px; color: #fff; cursor: pointer; margin-bottom: 30px; }
+  .agreement-label input { display: none; }
+  .custom-checkbox { width: 16px; height: 16px; border: 1px solid #ff1111; background: rgba(0, 0, 0, 0.5); display: inline-block; }
+  .agreement-label input:checked + .custom-checkbox { background: #ff1111; }
+  .accept-mission-btn { width: 100%; padding: 15px; background: rgba(30, 5, 5, 0.5); border: 1px solid #551111; color: #551111; font-weight: bold; letter-spacing: 3px; cursor: not-allowed; }
+  .accept-mission-btn.enabled { background: #ff1111; border: 1px solid #ff1111; color: #000; cursor: pointer; }
+  
+  .login-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(5, 1, 1, 0.85); backdrop-filter: blur(8px); z-index: 100; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+  .login-modal-overlay.active { opacity: 1; pointer-events: auto; }
+  .login-box { background: rgba(20, 3, 3, 0.85); border: 1px solid #ff1111; padding: 40px; width: 100%; max-width: 420px; position: relative; }
+  .close-btn { position: absolute; top: 15px; right: 20px; font-size: 28px; color: #b0b0b0; cursor: pointer; }
+  .close-btn:hover { color: #ff1111; }
+  .login-subtitle { font-size: 10px; color: #ff3333; letter-spacing: 1px; margin-bottom: 30px; text-align: left;}
+  .input-group { margin-bottom: 22px; text-align: left; }
+  .input-group label { display: block; font-size: 11px; letter-spacing: 2px; color: #b0b0b0; margin-bottom: 8px; }
+  .input-group input { width: 100%; padding: 12px 15px; background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 17, 17, 0.3); color: #fff; }
+  .input-group input:focus { outline: none; border-color: #ff1111; }
+  .login-submit-btn { width: 100%; padding: 14px; background: #ff1111; border: none; color: #000; font-weight: bold; letter-spacing: 3px; cursor: pointer; }
+  
+  .auth-tabs { display: flex; gap: 10px; border-bottom: 1px solid rgba(255, 17, 17, 0.2); margin-bottom: 15px; }
+  .auth-tab { background: none; border: none; color: #551111; font-size: 13px; font-weight: bold; padding: 10px 5px; cursor: pointer; position: relative; }
+  .auth-tab:hover, .auth-tab.active { color: #ff1111; }
+  .auth-tab.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: #ff1111; }
+  
+  @media (max-width: 900px) {
+    .manifesto-grid, .terminal-dashboard-container { grid-template-columns: 1fr; gap: 20px; }
+    .navbar { padding: 20px; }
+    .nav-links, .nav-status, .status-container { display: none; }
+    h1 { font-size: 45px; }
+  }
+
+  /* --- Authentication State Layout Adaptive Rules --- */
+
+/* When logged out, transform the main layout from a 2-column grid into a clean single-column presentation */
+.terminal-dashboard-container.logged-out-state {
+    grid-template-columns: 1fr;
+    max-width: 1000px;
+  }
+  
+  /* Hide the user's passport, mission logs, and personal tracking gauges */
+  .terminal-dashboard-container.logged-out-state .terminal-sidebar {
+    display: none !important;
+  }
+  
+  /* Hide the interactive metrics transaction form */
+  .terminal-dashboard-container.logged-out-state .interactive-log-panel {
+    display: none !important;
+  }
+  
+  /* Adjust the main hub header to reflect a secure viewing deck */
+  .terminal-dashboard-container.logged-out-state .hub-header {
+    text-align: center;
+    color: #666;
+    letter-spacing: 4px;
+    background: rgba(255, 17, 17, 0.02);
+  }
+  
+  /* Make the leaderboard card take center stage when logged out */
+  .terminal-dashboard-container.logged-out-state .cyber-leaderboard-card {
+    margin: 30px;
+    box-shadow: 0 15px 40px rgba(255, 17, 17, 0.05);
+  }

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Squad Terminal Engine</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">SQUAD<span>//28</span></div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#home" class="nav-item active">HOME</a></li>
+        <li><a href="#manifesto" class="nav-item">MANIFESTO</a></li>
+        <li><a href="#terminal" class="nav-item">TERMINAL</a></li>
+        <li><a href="#" id="nav-login-btn">LOGIN</a></li> 
+      </ul>
+    </nav>
+    
+    <div class="status-container">
+      <div class="nav-status status-offline" id="sysStatus">SYS_STATUS: OFFLINE</div>
+      <div class="status-dropdown" id="statusDropdown">
+        <a href="#" id="logoutBtn">GO OFFLINE // DISCONNECT</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero-parallax-wrapper" id="home">
+    <div class="parallax-bg hero-bg"></div>
+    <div class="grid-overlay"></div>
+    <div class="vignette"></div>
+    
+    <div class="content">
+      <div class="cyber-tag">未来はここにある // THE FUTURE IS HERE</div>
+      <h1>NEO SQUAD</h1>
+      <p>Dressed in shadows, fueled by the neon pulse. Step into the underground grid.</p>
+      <button class="cyber-btn" id="hero-login-btn">INITIALIZE TERMINAL</button>
+    </div>
+  </section>
+
+  <section class="hero-parallax-wrapper" id="manifesto">
+    <div class="parallax-bg manifesto-bg"></div>
+    <div class="grid-overlay"></div>
+    <div class="vignette"></div>
+
+    <div class="manifesto-container">
+      <div class="manifesto-header">
+        <span class="section-number">01//</span>
+        <h2>OUR_MANIFESTO</h2>
+        <div class="accent-bar"></div>
+      </div>
+
+      <div class="manifesto-grid">
+        <div class="manifesto-card">
+          <h3>[01] DECENTRALIZED IDENTITY</h3>
+          <p>We operate outside the traditional architecture. In a digital environment built on complete observation, shadows are our only protective cover. Anonymity is not a crime.</p>
+        </div>
+        <div class="manifesto-card">
+          <h3>[02] THE NEON PULSE</h3>
+          <p>Technology is not a mechanism for control; it is raw, uninhibited human expression. We interface directly with the core mainframe to distribute processing power back.</p>
+        </div>
+        <div class="manifesto-card">
+          <h3>[03] PERMANENT CONVERGENCE</h3>
+          <p>The squad operates as a singular unit. We move together, fight through data firewalls together, and control the code. Unity is our network architecture.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero-parallax-wrapper" id="terminal">
+    <div class="parallax-bg terminal-bg"></div>
+    <div class="grid-overlay"></div>
+    <div class="vignette"></div>
+
+    <div class="terminal-dashboard-container">
+      
+      <aside class="terminal-sidebar">
+        <div class="passport-frame">
+          <div class="scanner-line"></div>
+          <img src="images/commander.png" alt="COMMANDING_OFFICER" class="passport-avatar" onerror="this.src='https://placehold.co/180x220/1a0505/ff1111?text=HQ_AVATAR'">
+          <div class="passport-badge" id="sidebarRankBadge">RANK: RECRUIT</div>
+        </div>
+
+        <div class="progress-tracking-box">
+          <div class="tracker-header">XP_PROGRESSION_GRID</div>
+          <div class="xp-metrics">
+            <span id="xpCurrentDisplay">0</span> / <span id="xpNeededDisplay">200</span> XP
+          </div>
+          <div class="xp-bar-container">
+            <div class="xp-bar-fill" id="xpBarFill" style="width: 0%;"></div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-readout">LEVEL: <span id="levelDisplay">1</span></div>
+            <div class="stat-readout">TOTAL SETS: <span id="totalSetsDisplay">0</span></div>
+          </div>
+        </div>
+
+        <div class="mission-briefing-box">
+          <div class="commander-tag">COMM_OFFICER // ATLAS_08</div>
+          <p class="objective-headline">"Flesh is a weakness. Build the steel frame today."</p>
+          
+          <div class="daily-goals-list">
+            <div class="goal-node">
+              <span class="goal-status active"></span>
+              <p><strong>OBJECTIVE:</strong> HYPERTROPHY OVERLOAD [CHEST/TRICEPS]</p>
+            </div>
+            <div class="goal-node">
+              <span class="goal-status"></span>
+              <p><strong>VOLUME TARGET:</strong> 4 SETS × 10 REPS BENCH PRESS [85% 1RM]</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="terminal-main-hub">
+        <div class="hub-header">OPERATOR_LOGS // METRIC_SUBMISSION_INTERFACE</div>
+        
+        <div class="interactive-log-panel">
+          <form id="workoutLogForm">
+            <div class="form-row">
+              <div class="log-input-group">
+                <label for="workoutSets">COMPLETED SETS</label>
+                <input type="number" id="workoutSets" placeholder="e.g., 4" min="1" required>
+              </div>
+              <div class="log-input-group">
+                <label for="workoutReps">REPS PER SET</label>
+                <input type="number" id="workoutReps" placeholder="e.g., 10" min="1" required>
+              </div>
+              <div class="log-input-group">
+                <label for="cardioTime">CARDIO COMPLETED (MIN)</label>
+                <input type="number" id="cardioTime" placeholder="e.g., 15" min="0" required>
+              </div>
+            </div>
+            <button type="submit" class="transmit-data-btn">TRANSMIT_WORKOUT_DATA_STREAM</button>
+          </form>
+        </div>
+
+        <div class="cyber-leaderboard-card">
+          <div class="leaderboard-panel-header">
+            <div class="panel-title-block">
+              <span class="neon-pulse-dot"></span>
+              <h2>GLOBAL_RANK_MATRIX</h2>
+            </div>
+            <div class="panel-subtitle-tag">LIVE_NODE_SYNC // ACTIVE</div>
+          </div>
+          
+          <div class="leaderboard-scroll-area">
+            <table class="redesigned-grid-table">
+              <thead>
+                <tr>
+                  <th class="col-align-left">POSITION</th>
+                  <th class="col-align-left">OPERATOR_ID</th>
+                  <th class="col-align-center">TIER_LEVEL</th>
+                  <th class="col-align-right">VOLUME_SETS</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboardBody">
+                <tr>
+                  <td colspan="4" class="leaderboard-empty-state">
+                    <div class="glitch-text-loader">> SCANNING SYSTEM FREQUENCIES...</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+
+    </div>
+
+    <div class="intercept-overlay active" id="interceptModal">
+      <div class="intercept-box">
+        <div class="warning-header">💥 SECURE_WARNING // RECRUITMENT_NOTICE 💥</div>
+        <h2>YOU CAN'T TURN YOUR BACK ON THIS MISSION.</h2>
+        <p class="intercept-text">
+          By activating this node console grid, you acknowledge that your current muscular state parameters require immediate architectural transformation. Leaving the grid is systemic failure.
+        </p>
+        <form id="agreementForm">
+          <label class="agreement-label">
+            <input type="checkbox" id="agreementCheckbox" required>
+            <span class="custom-checkbox"></span>
+            I ACCEPT THE PROTOCOLS // I WILL NOT ABANDON THE GRID
+          </label>
+          <button type="submit" class="accept-mission-btn" id="acceptMissionBtn" disabled>ENGAGE_MAIN_FRAME</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div class="promotion-modal-overlay" id="promotionModal">
+    <div class="promotion-glow-container">
+      <div class="promo-glitch-tag">RANK CHANGE DETECTED // 階級昇進</div>
+      <h2 class="promo-title">PROMOTION ACQUIRED</h2>
+      <div class="promo-divider-line"></div>
+      <p class="promo-label">YOUR NEW OPERATIONAL ARCHITECTURE DESIGNATION IS:</p>
+      <div class="promo-badge-glow" id="popupRankBadge">RANK: RECRUIT</div>
+      <button class="promo-close-btn" id="closePromoBtn">RESUME MISSION // CLOSE CONSOLE</button>
+    </div>
+  </div>
+
+  <div class="login-modal-overlay" id="loginModal">
+    <div class="login-box">
+      <div class="close-btn" id="closeBtn">&times;</div>
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabLogin" type="button">ACCESS_LOG_IN</button>
+        <button class="auth-tab" id="tabSignup" type="button">CREATE_SIGN_UP</button>
+      </div>
+      <p class="login-subtitle" id="authSubtitle">AUTHENTICATION REQUIRED // ENTER REGISTERED CREDENTIALS</p>
+      <form id="terminalLoginForm">
+        <div class="input-group">
+          <label for="username">OPERATOR_ID</label>
+          <input type="text" id="username" placeholder="e.g., GHOST_7" required autocomplete="off">
+        </div>
+        <div class="input-group">
+          <label for="password">ACCESS_PHRASE</label>
+          <input type="password" id="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="login-submit-btn" id="submitAuthBtn">INITIALIZE_BYPASS</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
